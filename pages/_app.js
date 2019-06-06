@@ -3,6 +3,8 @@ import App, { Container } from "next/app";
 import Link from "next/link";
 import NProgress from "nprogress";
 import Router from "next/router";
+import { Provider } from "unstated";
+import { counterStore } from "../unstated/CounterContainer";
 
 const linkStyle = {
   margin: "0 10px 0 0"
@@ -23,7 +25,26 @@ export default class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps };
+    let serverState = {};
+
+    if (ctx.req) {
+      // reset state for each request
+      counterStore.resetState();
+      // process state, in this case counter start with 999
+      counterStore.initState(999);
+      serverState = counterStore.state;
+    }
+
+    return { pageProps, serverState };
+  }
+
+  constructor(props) {
+    super(props);
+    // pass the state to client store
+    // serverState will be reset when client navigate with Link
+    if (process.browser) {
+      counterStore.initState(props.serverState.count);
+    }
   }
 
   render() {
@@ -45,7 +66,9 @@ export default class MyApp extends App {
           </Link>
         </div>
 
-        <Component {...pageProps} />
+        <Provider inject={[counterStore]}>
+          <Component {...pageProps} />
+        </Provider>
       </Container>
     );
   }
