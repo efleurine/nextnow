@@ -3,8 +3,11 @@
  *
  */
 
-const micro = require("micro");
+const { send } = require("micro");
 
-module.exports = micro((req, res) => {
-  return "Hello from Micro on Now 2.0!";
-});
+module.exports = async (req, res) => {
+  const statusCode = 200;
+  const data = "Micro working just fine";
+
+  send(res, statusCode, data);
+};
