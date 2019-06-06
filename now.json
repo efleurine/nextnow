@@ -5,7 +5,7 @@
   "builds": [
     { "src": "api/*.js", "use": "@now/node" },
     { "src": "www/static/*", "use": "@now/static" },
-    { "src": "www/package.json", "use": "@now/next" }
+    { "src": "www/next.config.js", "use": "@now/next" }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
