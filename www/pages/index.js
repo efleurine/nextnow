@@ -6,7 +6,7 @@ class Index extends React.Component {
     return (
       <div className="center">
         <div>
-          <div> Home page</div>
+          <div> Home page oneline</div>
           <div>
             <Link href="/next">
               <a>Go to the next page</a>
