@@ -10,7 +10,7 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/static/(.*)", "dest": "www/static/$1" },
-    { "src": "(.*)", "dest": "www/$1" }
+    { "src": "/(.*)", "dest": "www/$1" }
   ],
   "github": {
     "enabled": true
