@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "name": "emma-experiment",
+  "alias": "emma-experiment",
+  "builds": [
+    { "src": "api/*.js", "use": "@now/node" },
+    { "src": "www/static/*", "use": "@now/static" },
+    { "src": "www/package.json", "use": "@now/next" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1" },
+    { "src": "/static/(.*)", "dest": "www/static/$1" },
+    { "src": "(.*)", "dest": "www/$1" }
+  ],
+  "github": {
+    "enabled": true
+  }
+}
